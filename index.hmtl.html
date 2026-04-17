@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stickers Shop UA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            /* Яскравий та насичений живий градієнт з домінантою ФІОЛЕТОВОГО */
+            /* Палітра: Насичений Фіолетовий - Синій - Яскравий Рожевий */
+            /* Напрямок: до верхнього лівого кута (135deg) */
+            --bg-gradient: linear-gradient(135deg, #9c27b0, #6a1b9a, #2196f3, #ff4081, #9c27b0);
+            
+            /* Скляний стиль (як був) - адаптований для яскравішого фону */
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            
+            --accent: #4a148c; /* Глибокий фіолетовий для акцентів */
+            --text-main: #212121; /* Дуже темний текст для максимальної читабельності */
+            --h-color: #311b92; /* Колір заголовків */
+        }
+
+        /* Повільна та плавна анімація градієнта (як була, але з яскравішою палітрою) */
+        @keyframes gradientAnimation {
+            0% { background-position: 100% 100%; } /* Початок з нижнього правого */
+            50% { background-position: 0% 0%; }   /* Рух до верхнього лівого */
+            100% { background-position: 100% 100%; } /* Повернення (зациклення) */
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            background: var(--bg-gradient);
+            background-size: 300% 300%; /* Для плавності анімації */
+            animation: gradientAnimation 30s ease-in-out infinite; /* Дуже повільно */
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Текст оригіналу, нічого не змінено */
+        p, li, td, span {
+            /* М'яка тінь прибрана для кращої читабельності на яскравому фоні */
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 1px;
+            color: white; /* Білий колір для заголовка на яскравому фоні */
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            opacity: 1;
+            font-size: 1.1em;
+            margin-top: 10px;
+            color: white;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+            font-weight: 500;
+        }
+
+        /* Навігація */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        /* Скляний стиль (Glassmorphism) - ЯК БУВ */
+        .glass-ui {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav button, .btn-tg {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: var(--h-color);
+            padding: 12px 24px;
+            border-radius: 50px; /* Круглі приємні кнопки */
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        nav button:hover, .btn-tg:hover {
+            background: rgba(255, 255, 255, 0.7);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        nav button:active, .btn-tg:active {
+            transform: translateY(0);
+        }
+
+        .section {
+            display: none;
+            padding: 35px;
+            border-radius: 24px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .active { display: block; animation: fadeIn 0.6s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2, h3 {
+            color: var(--h-color);
+            margin-top: 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Бонус блок */
+        .bonus-box {
+            border: 2px dashed #bf9b30;
+            background: rgba(255, 215, 0, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .bonus-box h2 { border: none; color: #a67c00; padding: 0; }
+        .bonus-box p { color: #6d5400; font-weight: 600;}
+
+        /* Таблиці цін */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .price-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: #333;
+        }
+
+        .price-table tr:last-child td { border-bottom: none; }
+
+        .price-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.1em;
+        }
+
+        /* Telegram кнопка під стиль (як була) */
+        .btn-tg {
+            text-transform: none;
+            font-size: 1.1em;
+            padding: 15px 35px;
+            margin: 20px 0;
+            background: rgba(34, 158, 217, 0.15);
+            color: #007bb5;
+            border-color: rgba(34, 158, 217, 0.4);
+        }
+        .btn-tg:hover {
+            background: rgba(34, 158, 217, 0.3);
+            border-color: rgba(34, 158, 217, 0.6);
+        }
+
+        .warning-box {
+            background: rgba(255, 77, 77, 0.08);
+            border-left: 5px solid #ff4d4d;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            color: #b71c1c;
+        }
+        
+        .warning-box h3 { border: none; color: #b71c1c; padding: 0; margin-bottom: 10px;}
+        .warning-box ul li { color: #b71c1c; font-weight: 500; }
+        .warning-box p { color: #b71c1c; font-weight: 500;}
+
+        footer { text-align: center; padding: 50px; opacity: 0.8; font-size: 0.9em; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+
+        /* Скроллбар */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>💎 STICKERS SHOP UA</h1>
+    <p>Всім привіт! Тут можна придбати будь-які наклейки різних розмірів на вибір</p>
+</header>
+
+<nav class="glass-ui" style="border-radius: 0 0 20px 20px; border-top:none;">
+    <button onclick="show('main')">Головна</button>
+    <button onclick="show('prices')">Ціни</button>
+    <button onclick="show('packs')">Набори</button>
+    <button onclick="show('premium')">Premium</button>
+    <button onclick="show('contact')">Замовити</button>
+</nav>
+
+<div class="container">
+
+    <div id="main" class="section glass-ui active">
+        <div class="bonus-box">
+            <h2>🎁 Невиликий Бонус 🎁</h2>
+            <p>Доречі кожному новому покупцю якщо він купить 5 наклейок любого розміру то 2 mini у подарунок це вітальна пропозиція після використання пропозиція для того хто використав не діє</p>
+        </div>
+
+        <h3>💎 КАСТОМНІ НАЛІПКИ 💎</h3>
+        <p>Кастомні наліпки — це як? Ви надсилаєте нам зображення, яке буде на наклейці, і ми його друкуємо. Ми повідомимо вам, якщо якість зображення може бути низькою. При купівлі Ultra можна буде подивитися, як ваша наклейка виглядатиме за допомогою ШІ.</p>
+        
+        <h3 style="margin-top: 30px;">👍 ПОКРАЩЕННЯ КАСТОМНИХ НАЛІПОК 👍</h3>
+        <p>Що це означає? Уявіть, ви надіслали нам зображення для Ultra наклейки з низькою якістю — ви розумієте, як воно виглядатиме.</p>
+    </div>
+
+    <div id="prices" class="section glass-ui">
+        <h3>💰 Прайс на кастомні наліпки</h3>
+        <table class="price-table">
+            <tr><td>Mini — 5х5 см</td><td>10 грн/шт</td></tr>
+            <tr><td>Medium — 7х7 см</td><td>25 грн/шт</td></tr>
+            <tr><td>Big — 10х10 см</td><td>50 грн/шт</td></tr>
+            <tr><td>Ultra — A4 формат</td><td>180 грн/шт</td></tr>
+        </table>
+
+        <h3 style="margin-top: 30px;">✨ ПОКРАЩЕННЯ КАСТОМНИХ НАЛІПОК ✨</h3>
+        <table class="price-table">
+            <tr><td>Mini — 5х5 см</td><td>15 грн/шт</td></tr>
+            <tr><td>Medium — 7х7 см</td><td>30 грн/шт</td></tr>
+            <tr><td>Big — 10х10 см</td><td>55 грн/шт</td></tr>
+            <tr><td>Ultra — A4 формат</td><td>185 грн/шт</td></tr>
+        </table>
+    </div>
+
+    <div id="packs" class="section glass-ui">
+        <h3>🪼 НАБОРИ 🪼</h3>
+        <p>У нас є власні набори, які оновлюються приблизно щомісяця. Коли з’являється новий набір, попередній стає лімітованим, і його ціна зростає на 2 грн.</p>
+        <table class="price-table">
+            <tr><td>Mini набір — 10 наклейок у Mini розмірах</td><td>80 грн/набір</td></tr>
+            <tr><td>Medium набір — 15 наклейок у Mini розмірах</td><td>130 грн/набір</td></tr>
+            <tr><td>Big набір — 10 наклейок у Medium розмірах</td><td>200 грн/набір</td></tr>
+            <tr><td>Ultra набір — 30 наклейок у Mini розмірах</td><td>290 грн/набір</td></tr>
+            <tr><td>Ultra набір (або 6 Big наклейок)</td><td>300 грн/набір</td></tr>
+        </table>
+        <p style="opacity: 0.9; font-size: 0.95em; color: #444; font-weight: 500;">У різних наборах будуть додаватися нові наклейки, а попередніх буде більше.</p>
+    </div>
+
+    <div id="premium" class="section glass-ui">
+        <h3>🦋 PREMIUM-СТАТУСИ 🦋</h3>
+        <p>Що це таке і навіщо? Premium-статус дає знижки на всі наклейки. Для користувачів Premium буде окремий приватний канал із кастомними наборами.</p>
+        <ul style="margin-left: 20px; padding-left: 0; color: #333; font-weight: 500;">
+            <li>Знижка 5 грн на всі наклейки (крім Ultra).</li>
+            <li>Ultra замість 180 грн коштує 130 грн.</li>
+            <li>На набори знижка 10 грн (на весь набір, а не на кожну наклейку).</li>
+        </ul>
+        <table class="price-table" style="margin-top: 25px;">
+            <tr><td>Premium-статус на 1 місяць</td><td>300 грн</td></tr>
+            <tr><td>Premium-статус на 3 місяці</td><td>850 грн</td></tr>
+            <tr><td>Premium-статус назавжди</td><td>1500 грн</td></tr>
+        </table>
+        <div style="background: rgba(255,255,255,0.4); padding: 15px; border-radius: 10px; margin-top: 15px; font-size: 0.95em; border: 1px solid rgba(0,0,0,0.05); color: #444; font-weight: 500;">
+            ❗️ Якщо ви вже купили щось із Premium-статусом, гроші за сам статус не повертаються, хіба що домовитися з нами особисто.
+        </div>
+    </div>
+
+    <div id="contact" class="section glass-ui">
+        <h3>😔 ЗВ’ЯЗОК З НАМИ 😔</h3>
+        <p>Щоб замовити товар зв'яжіться з нами через Telegram:</p>
+        <div style="text-align: center;">
+            <a href="https://t.me/youtuber_simdom" class="btn-tg">
+                <i class="fab fa-telegram-plane" style="margin-right: 10px;"></i>@youtuber_simdom
+            </a>
+        </div>
+        <p style="margin-top: 20px;">📢 Наш канал: <a href="https://t.me/StikersShopUA" style="color:var(--accent); text-decoration: none; font-weight: 700;">t.me/StikersShopUA</a></p>
+        <p>💬 Наш чат: <a href="https://t.me/StikersShopUAchat" style="color:var(--accent); text-decoration: none; font-weight: 700;">t.me/StikersShopUAchat</a></p>
+
+        <div class="warning-box">
+            <h3>❗️ НЕВЕЛИКІ УМОВИ ЩОДО НАКЛЕЙОК ❗️</h3>
+            <ul style="margin-left: 20px; padding-left: 0;">
+                <li>При купівлі Mini потрібно замовити мінімум 8 наклейок.</li>
+                <li>При купівлі Medium — мінімум 5 наклейок.</li>
+                <li>При купівлі Big — мінімум 3 наклейки.</li>
+                <li>При купівлі Ultra — мінімум 1 наклейка.</li>
+            </ul>
+            <p>Якщо клієнт замовив товар, але після виготовлення відмовився купувати, він отримує 1 штрафне очко. Якщо потім выкупив — очко знімається. Але якщо він не викупив продаєм ми тільки передплатою.</p>
+            <p>❗️ Якщо ви придбали Premium-статус і вже щось купили, гроші за статус не повертаються (хіба домовитися з нами).</p>
+            <p>❗️ Якщо ми не можемо переконатися що ви дійсно потім заплатите то ми берем передплату.</p>
+            <p>Умови можуть змінюватися, тому слідкуйте за каналом — ми вас попередимо.</p>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>При купівлі ви погоджуєтеся з нашими умовами @2026</p>
+</footer>
+
+<script>
+    function show(id) {
+        // Сховати всі секції
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        // Показати вибрану
+        document.getElementById(id).classList.add('active');
+        // Скролл вгору
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>
